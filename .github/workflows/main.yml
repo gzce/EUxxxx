@@ -16,7 +16,7 @@ jobs:
   Renew:
     runs-on: ubuntu-22.04
     # 超时设置
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: checkout
         uses: actions/checkout@v3
