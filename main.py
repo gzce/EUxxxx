@@ -163,7 +163,7 @@ def captcha():
     msgCaptcha = sb.get_text('#status-bar-success-message')
     tryCaptcha = 1
     while 'DONE' not in msgCaptcha:
-        if tryCaptcha > 15:
+        if tryCaptcha > 20:
             break
         print(msgCaptcha)
         tryCaptcha += 1
