@@ -1,8 +1,12 @@
 [![Renew](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml)
+#### 🕒 TODO
+- [ ] func renew
+
 #### ✏️ NOTE
-- [] func renew
-- 11.08 fix get pin when Attempted Login
-- 11.06 rebuild
+- 11.08 
+  * fix get pin when Attempted Login
+- 11.06 
+  * rebuild
   * 每次运行时间约 2 分钟
 
 #### 🌟️ SUGGESTION
