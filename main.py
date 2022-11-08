@@ -90,22 +90,50 @@ def login():
     #sb.click('input[class="btn btn-primary float-end"]')
     sb.click('input[value="Login"]')
     sb.sleep(5)
+    i = 1
     try:
-        sb.assert_element('img#captcha', timeout=5)
-        msg = sb.get_text('td[class="verdana12px-sw"]')
-        print('- captcha found!\nmsg:', msg)
-        image = sb.find_element('img#captcha')
-        image.screenshot(os.getcwd()+imgCaptcha)
-        textCaptcha = captcha()
-        #           切回 EU
-        sb.switch_to_window(0)
-        sb.type('input[name="captcha_code"]', textCaptcha)
-        sb.click('input[value="Login"]')
-        sb.sleep(5)
+        while sb.assert_element('img#captcha', timeout=5):
+            if i > 3:
+                break
+            try:
+                msg1 = sb.get_text('td[class="verdana12px-sw"]')
+                msg2 = sb.get_text('td[class="verdana14px-rot-b"]')
+                print('- [captcha] found!\n%s\n%s', msg1, msg2)
+            except Exception:
+                msg1 = sb.get_text('td[class="verdana12px-sw"]')
+                print('- [captcha] found!\n%s', msg1)
+
+            image = sb.find_element('img#captcha')
+            image.screenshot(os.getcwd()+imgCaptcha)
+            textCaptcha = captcha()
+            #           切回 EU
+            sb.switch_to_window(0)
+            sb.type('input[name="captcha_code"]', textCaptcha)
+            sb.click('input[value="Login"]')
+            i += 1
+            sb.sleep(5)
+    except Exception:
+        print('- [captcha] not found')
+    try:
+        while sb.assert_element('input[name="pin"]'):
+            if i > 3:
+                break
+            try:
+                pin = get_pin()
+            except Exception as e:
+                print(e, '\n- Send new PIN')
+                sb.click('button[class="btn btn-primary btn-sm"]')
+                sb.sleep(5)
+                pin = get_pin()
+            print('- fill pin')
+            sb.type('name=pin', pin)
+            sb.click('input[value="Confirm"]')
+            i += 1
+            sb.sleep(5)
 
     except Exception:
-        print('- captcha not found')
-    #sb.assert_text('Customer Data', ('#kc2_content_title'))
+        print('- [Attempted Login] not found')
+
     sb.assert_text('Cover Page', 'td[class="td-nav-u-left td-nav-selected"] a')
     print('- login success')
     return True

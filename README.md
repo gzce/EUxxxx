@@ -1,7 +1,8 @@
 [![Renew](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml)
 #### ✏️ NOTE
-- 11.07 续期待补充
-- 11.06 新建
+- [] func renew
+- 11.08 fix get pin when Attempted Login
+- 11.06 rebuild
   * 每次运行时间约 2 分钟
 
 #### 🌟️ SUGGESTION
@@ -36,7 +37,7 @@ schedule:
   |`TG_USER_ID`|(可选) 给 bot `@userinfobot` 发送 `/start`|
 
 #### 📌 pin (别改其他名字)
-<img src="pin.png">
+<img src="img/pin.png">
 
 #### 📚 THANKS
 - [SeleniumBase](https://github.com/seleniumbase)
