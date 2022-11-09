@@ -70,6 +70,7 @@ def recaptcha():
 
 
 def login():
+    # window[0]
     print('- login')
     try:
         sb.open(urlBase)
@@ -80,11 +81,10 @@ def login():
         sb.open(urlBase)
         sb.assert_text('Login your account', 'h2', timeout=20)
         print('- access')
-#    sb.switch_to_default_content()  # Exit all iframes
     sb.sleep(1)
-    print('- fill username')
+    print('- fill [username]')
     sb.type('input[name="email"]', username)
-    print('- fill password')
+    print('- fill [password]')
     sb.type('input[name="password"]', password)
     print('- click [Login]')
     #sb.click('input[class="btn btn-primary float-end"]')
@@ -106,14 +106,16 @@ def login():
             image = sb.find_element('img#captcha')
             image.screenshot(os.getcwd()+imgCaptcha)
             textCaptcha = captcha()
-            #           切回 EU
+            #   切回 EU
             sb.switch_to_window(0)
+            print('- fill [captcha_code]')
             sb.type('input[name="captcha_code"]', textCaptcha)
+            print('- click [Login]')
             sb.click('input[value="Login"]')
             i += 1
             sb.sleep(5)
-    except Exception:
-        print('- [captcha] not found')
+    except Exception as e:
+        print('- [captcha]:', e)
     try:
         while sb.assert_element('input[name="pin"]'):
             if i > 3:
@@ -131,8 +133,8 @@ def login():
             i += 1
             sb.sleep(5)
 
-    except Exception:
-        print('- [Attempted Login] not found')
+    except Exception as e:
+        print('- [Attempted Login]:', e)
 
     sb.assert_text('Cover Page', 'td[class="td-nav-u-left td-nav-selected"] a')
     print('- login success')
@@ -140,6 +142,7 @@ def login():
 
 
 def captcha():
+    # window[1]
     global msgCaptcha
     print('- captcha')
     try:
@@ -155,11 +158,12 @@ def captcha():
         print('- access')
 
     recaptcha()
-
+    print('- waiting for captcha img upload...')
     sb.choose_file('input[type="file"]', os.getcwd() + imgCaptcha)
     sb.sleep(2)
+    print('- click [submit]')
     sb.click('#demo-submit')
-
+    print('- waiting for captcha response...')
     msgCaptcha = sb.get_text('#status-bar-success-message')
     tryCaptcha = 1
     while 'DONE' not in msgCaptcha:
@@ -169,7 +173,7 @@ def captcha():
         tryCaptcha += 1
         sb.sleep(2)
         msgCaptcha = sb.get_text('#status-bar-success-message')
-    print('- msgCaptcha:', msgCaptcha)
+    print('- final response:', msgCaptcha)
     textCaptcha = sb.find_element('#text_response').get_attribute('value')
     print('- textCaptcha:', textCaptcha)
     if len(textCaptcha) == 3:
@@ -270,7 +274,7 @@ def renew():
         print('- status:', status)
         dateDelta = date_delta_calculate(status.split(' ')[-1])
         if dateDelta > 0:
-            msg = '%s: No Need To Renew, %d Days Left!' % (username[:3] + '***', dateDelta)
+            msg = '[%s***]: No Need To Renew, %d Days Left!' % (username[:3], dateDelta)
             print('- msg:', msg)
             body = status + '\n' + msg
 
@@ -318,7 +322,7 @@ def screenshot():
     print('- 📷 img url:', imgUrl)
     body = imgUrl
     print('- screenshot upload done')
-
+    sb.driver.close()
     return imgUrl
 
 
