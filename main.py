@@ -297,7 +297,9 @@ def get_pin():
     response = requests.get(url=MAILPARSER)
     pin = response.json()[0]['pin']
     print('- pin:', pin)
-    return
+    print('- type(pin):', type(pin))
+    pin = str(pin)
+    return pin
 
 
 def screenshot():
