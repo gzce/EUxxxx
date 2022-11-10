@@ -297,8 +297,6 @@ def get_pin():
     response = requests.get(url=MAILPARSER)
     pin = response.json()[0]['pin']
     print('- pin:', pin)
-    #print('- type(pin):', type(pin))
-    #pin = str(pin)
     return pin
 
 
@@ -399,11 +397,9 @@ except:
 ##
 urlBase = url_decode('c3VwcG9ydC5ldXNlcnYuY29t')
 urlCaptcha = url_decode('aHR0cHM6Ly90cnVlY2FwdGNoYS5vcmcvZGVtby5odG1s')
-urlRenew = 'https://' + urlBase + '/vps-renew'
 urlSpeech = url_decode(
     'aHR0cHM6Ly9henVyZS5taWNyb3NvZnQuY29tL2VuLXVzL3Byb2R1Y3RzL2NvZ25pdGl2ZS1zZXJ2aWNlcy9zcGVlY2gtdG8tdGV4dC8jZmVhdHVyZXM==')
 ##
-
 body = ''
 msgCaptcha = ''
 audioMP3 = '/' + urlBase + '.mp3'
