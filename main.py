@@ -50,7 +50,7 @@ def recaptcha():
 
         except Exception as e:
             print('- 💣 Exception:', e)
-            body = e
+            body = str(e)
             sb.switch_to_default_content()  # Exit all iframes
             sb.sleep(1)
             sb.switch_to_frame('[src*="/recaptcha/api2/bframe?"]')
@@ -297,8 +297,8 @@ def get_pin():
     response = requests.get(url=MAILPARSER)
     pin = response.json()[0]['pin']
     print('- pin:', pin)
-    print('- type(pin):', type(pin))
-    pin = str(pin)
+    #print('- type(pin):', type(pin))
+    #pin = str(pin)
     return pin
 
 
@@ -424,7 +424,7 @@ with SB(uc=True) as sb:  # By default, browser="chrome" if not set.
             try:
                 screenshot()
             finally:
-                push(e)
+                push(str(e))
         push(body)
     else:
         print('- please check urlBase/username/password')
