@@ -5,6 +5,7 @@ import os, requests, urllib, pydub, base64, ssl, time
 from seleniumbase import SB
 from datetime import datetime
 from urllib.parse import quote
+import pyscreenshot as ImageGrab
 
 
 def recaptcha():
@@ -303,12 +304,18 @@ def get_pin():
 def screenshot():
     global body
     print('- screenshot')
-    sb.save_screenshot(imgFile, folder=os.getcwd())
+    # grab fullscreen
+    im = ImageGrab.grab()
+    # save image file
+    im.save("fullscreen.png")
+    
+    #sb.save_screenshot(imgFile, folder=os.getcwd())
     print('- screenshot done')
     sb.open_new_window()
     print('- screenshot upload')
     sb.open('http://imgur.com/upload')
-    sb.choose_file('input[type="file"]', os.getcwd() + '/' + imgFile)
+    # sb.choose_file('input[type="file"]', os.getcwd() + '/' + imgFile)
+    sb.choose_file('input[type="file"]', "fullscreen.png")
     sb.sleep(6)
     imgUrl = sb.get_current_url()
     i = 1
@@ -405,7 +412,7 @@ body = ''
 msgCaptcha = ''
 audioMP3 = '/' + urlBase + '.mp3'
 audioWAV = '/' + urlBase + '.wav'
-imgFile = urlBase + '.png'
+#imgFile = urlBase + '.png'
 imgCaptcha = '/captcha.png'
 # 关闭证书验证
 ssl._create_default_https_context = ssl._create_unverified_context
