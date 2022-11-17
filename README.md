@@ -3,13 +3,15 @@
 - [ ] func renew 11/21
 
 #### ✏️ NOTE
+- 11.17
+  - update body, push, screenshot, yml
 - 11.10
-  * fix func get_pin, return pin
+  - fix func get_pin, return pin
 - 11.08 
-  * fix get pin when Attempted Login
+  - fix get pin when Attempted Login
 - 11.06 
-  * rebuild
-  * 每次运行时间约 2 分钟
+  - rebuild
+  - 每次运行时间约 2 分钟
 
 #### 🌟️ SUGGESTION
 ```diff
