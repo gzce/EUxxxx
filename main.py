@@ -275,9 +275,8 @@ def renew():
         print('- status:', status)
         dateDelta = date_delta_calculate(status.split(' ')[-1])
         if dateDelta > 0:
-            msg = '[%s***]: No Need To Renew, %d Days Left!' % (username[:3], dateDelta)
-            print('- msg:', msg)
-            body = status + '\n' + msg
+            body = '[%s***]\n%s, %d Day(s) Left!' % (username[:3], status, dateDelta)
+            print('- msg:', body)
 
 
 def date_delta_calculate(date_allow):
