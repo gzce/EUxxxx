@@ -275,7 +275,7 @@ def renew():
         print('- status:', status)
         dateDelta = date_delta_calculate(status.split(' ')[-1])
         if dateDelta > 0:
-            body = '[%s***]\n%s, %d Day(s) Left!' % (username[:3], status, dateDelta)
+            body = '[%s***]\n⏰ %s, %d Day(s) Left!' % (username[:3], status, dateDelta)
             print('- msg:', body)
 
 
