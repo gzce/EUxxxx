@@ -25,6 +25,8 @@ jobs:
         uses: szenius/set-timezone@v1.1
         with:
           timezoneLinux: "Asia/Shanghai"
+          timezoneMacos: "Asia/Shanghai"
+          timezoneWindows: "Shanghai Standard Time"
         
       - name: Setup FFmpeg using versions
         uses: Iamshankhadeep/setup-ffmpeg@v1.2
