@@ -21,6 +21,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         
+      - name: Setup Timezone
+        uses: szenius/set-timezone@v1.1
+        with:
+          timezoneLinux: "Asia/Shanghai"
+        
       - name: Setup FFmpeg using versions
         uses: Iamshankhadeep/setup-ffmpeg@v1.2
         
