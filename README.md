@@ -3,6 +3,8 @@
 - [ ] func renew 11/21
 
 #### ✏️ NOTE
+- 11.20
+  - add timezone setting
 - 11.17
   - update body, push, screenshot, yml
 - 11.10
