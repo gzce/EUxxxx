@@ -252,10 +252,10 @@ def renew():
     print('- click [vServer]')
     sb.click('#kc2_order_customer_orders_tab_1')
     try:
-        sb.click('button:contains("Extend contract")')
+        sb.click('input[value="Extend contract"]')
         print('- click button [Extend contract]')
         sb.sleep(4)
-        sb.click('button:contains("Extend")')
+        sb.click('input[value="Extend"]')
         print('- click button [Extend]')
         sb.sleep(10)    # Security check, maybe
         try:
@@ -268,7 +268,8 @@ def renew():
         sb.sleep(2)
         print('- fill pin')
         sb.type('name=auth', pin)
-        sb.click('button:contains("Continue")')
+        #sb.click('button:contains("Continue")')
+        sb.click('button[lock="0"]')
         sb.sleep(10)    # Security check, maybe
         confirmation = sb.get_text('#kc2_customer_contract_details_extend_contract_confirmation_dialog_main')
         print('- Contract Extension Confirmation:', confirmation)
@@ -276,7 +277,8 @@ def renew():
         
 
 
-    except Exception:
+    except Exception as e:
+        print('- 👀 renew:', e)
         status = sb.get_text('div[class="kc2_order_extend_contract_term_container"]')
         print('- status:', status)
         dateDelta = date_delta_calculate(status.split(' ')[-1])
