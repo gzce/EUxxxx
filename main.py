@@ -261,12 +261,14 @@ def renew():
         sb.sleep(10)    # Security check, maybe
         try:
             sb.wait_for_element('#kc2_security_password_dialog_title')
+            sb.sleep(10)    # wait for email
             pin = get_pin()
         except Exception as e:
-            print(e, '\n- Send new PIN')
-            sb.click('button[class="btn btn-primary btn-sm"]')
-            sb.sleep(5)
-            pin = get_pin()
+#             print(e, '\n- Send new PIN')
+#             sb.click('button[class="btn btn-primary btn-sm"]')
+#             sb.sleep(10)
+#             pin = get_pin()
+              pass
         sb.sleep(2)
         print('- fill pin')
         sb.type('name=auth', pin)
