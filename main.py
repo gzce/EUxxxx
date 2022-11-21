@@ -254,11 +254,13 @@ def renew():
     try:
         sb.click('input[value="Extend contract"]')
         print('- click button [Extend contract]')
-        sb.sleep(4)
+        sb.sleep(6)
+        sb.wait_for_element('input[value="Extend"]')
         sb.click('input[value="Extend"]')
         print('- click button [Extend]')
         sb.sleep(10)    # Security check, maybe
         try:
+            sb.wait_for_element('#kc2_security_password_dialog_title')
             pin = get_pin()
         except Exception as e:
             print(e, '\n- Send new PIN')
@@ -271,8 +273,10 @@ def renew():
         #sb.click('button:contains("Continue")')
         sb.click('button[lock="0"]')
         sb.sleep(10)    # Security check, maybe
-        confirmation = sb.get_text('#kc2_customer_contract_details_extend_contract_confirmation_dialog_main')
-        print('- Contract Extension Confirmation:', confirmation)
+        confirmation = '#kc2_customer_contract_details_extend_contract_confirmation_dialog_main'
+        sb.wait_for_element(confirmation)
+        #confirmation = 
+        print('- Contract Extension Confirmation:', sb.get_text(confirmation))
         screenshot()
         
 
