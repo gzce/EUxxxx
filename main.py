@@ -281,7 +281,15 @@ def renew():
         print('- Contract Extension Confirmation:', sb.get_text(confirmation))
         sb.click('input[value="Confirm"]')
         sb.sleep(6)
-        screenshot()
+        try:
+            renewStatus = sb.get_text('table[class="kc2_content_table"]')
+            print('- renewStatus:', renewStatus)
+            if 'Thank you' in renewStatus:
+                body = '[%s***]\n🎉 Thank you! The contract has been extended.' % (username[:3])
+                print('- msg:', body)
+        except Exception as e:
+            print('- 👀 renewStatus:', e)
+        #screenshot()
         pass
 
 
