@@ -279,8 +279,10 @@ def renew():
         sb.wait_for_element(confirmation)
         #confirmation = 
         print('- Contract Extension Confirmation:', sb.get_text(confirmation))
+        sb.click('input[value="Confirm"]')
+        sb.sleep(6)
         screenshot()
-        
+        pass
 
 
     except Exception as e:
@@ -430,7 +432,7 @@ imgCaptcha = '/captcha.png'
 # 关闭证书验证
 ssl._create_default_https_context = ssl._create_unverified_context
 
-with SB(uc=True) as sb:  # By default, browser="chrome" if not set.
+with SB(uc=True, sjw=True) as sb:  # By default, browser="chrome" if not set.
     print('- 🚀 loading...')
     if urlBase != '' and username != '' and password != '':
         try:
