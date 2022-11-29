@@ -1,8 +1,13 @@
 [![Renew](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml)
 #### 🕒 TODO
-- [ ] func renew 11/21
+- None
 
 #### ✏️ NOTE
+- 11.29
+  - fix customer data confirm while login
+  - renew status check
+- 11.21
+  - func renew
 - 11.20
   - add timezone setting
 - 11.17
