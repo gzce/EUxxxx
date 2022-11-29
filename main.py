@@ -137,10 +137,24 @@ def login():
 
     except Exception as e:
         print('- [Attempted Login]:', e)
-
-    sb.assert_text('Cover Page', 'td[class="td-nav-u-left td-nav-selected"] a')
-    print('- login success')
-    return True
+        
+    try:
+        loginInfo = '#kc2_content_core'
+        sb.wait_for_element(loginInfo)
+        loginInfoText = sb.get_text(loginInfo)
+        if 'Confirm' in loginInfoText:
+            print('- Confirm or change your customer data here.')
+            print('- Click [Save]')
+            sb.click('input[value="Save"]')
+            print('- Save clicked')
+            sb.sleep(3)
+            assert 'Thank you' in sb.get_text(loginInfo)
+            print('- The customer data has been changed.')
+        elif 'Hello' in loginInfoText:
+            print('- login success')
+        return True
+    except Exception as e:
+        print('- [loginInfo]:', e)
 
 
 def captcha():
@@ -153,7 +167,7 @@ def captcha():
         sb.assert_text('Try solving your captchas right now!', 'div[class="section-subtitle"]', timeout=20)
         print('- access')
     except Exception as e:
-        print('👀 ', e, '\n try again!')
+        print('- 👀 ', e, '\n try again!')
         sb.open_new_window()
         sb.open(urlCaptcha)
         sb.assert_text('Try solving your captchas right now!', 'div[class="section-subtitle"]', timeout=20)
@@ -237,14 +251,6 @@ def speech_to_text():
 def renew():
     global body
     print('- renew')
-    try:
-        msgConfirm = sb.get_text('#kc2_content_description')
-        if msgConfirm == 'Confirm or change your customer data here.':
-            print(msgConfirm)
-            sb.click('input[value="Save"]')
-            print('- Save clicked')
-    except Exception:
-        pass
     print('- click [Cover Page]')
     sb.click('a:contains("Cover Page")')
     sb.sleep(4)
@@ -287,7 +293,7 @@ def renew():
             print('- renewStatus:', renewStatus)
             if 'Thank you' in renewStatus:
                 body = '[%s***]\n🎉 %s' % (username[:3], renewStatus)
-                print('- msg:', body)
+                #print('- msg:', body)
         except Exception as e:
             print('- 👀 renewStatus:', e)
             screenshot()
@@ -299,7 +305,7 @@ def renew():
         print('- status:', status)
         dateDelta = date_delta_calculate(status.split(' ')[-1])
         if dateDelta > 0:
-            body = '[%s***]\n⏰ %s, %d Day(s) Left!' % (username[:3], status, dateDelta)
+            body = '[%s***]\n⏰ %s, %d day(s) left!' % (username[:3], status, dateDelta)
             print('- msg:', body)
 
 
