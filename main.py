@@ -264,7 +264,7 @@ def renew():
             sb.sleep(10)    # wait for email
             pin = get_pin()
         except Exception as e:
-#             print(e, '\n- Send new PIN')
+              print('- 267:', e)
 #             sb.click('button[class="btn btn-primary btn-sm"]')
 #             sb.sleep(10)
 #             pin = get_pin()
@@ -272,25 +272,24 @@ def renew():
         sb.sleep(2)
         print('- fill pin')
         sb.type('name=auth', pin)
-        #sb.click('button:contains("Continue")')
         sb.click('button[lock="0"]')
         sb.sleep(10)    # Security check, maybe
         confirmation = '#kc2_customer_contract_details_extend_contract_confirmation_dialog_main'
         sb.wait_for_element(confirmation)
-        #confirmation = 
         print('- Contract Extension Confirmation:', sb.get_text(confirmation))
         sb.click('input[value="Confirm"]')
         sb.sleep(6)
         try:
-            renewStatus = sb.get_text('table[class="kc2_content_table"]')
+            renewText = 'td[class="verdana14px-rot-b"]'
+            sb.assert_element(renewText)
+            renewStatus = sb.get_text(renewText)
             print('- renewStatus:', renewStatus)
             if 'Thank you' in renewStatus:
-                body = '[%s***]\n🎉 Thank you! The contract has been extended.' % (username[:3])
+                body = '[%s***]\n🎉 %s' % (username[:3], renewStatus)
                 print('- msg:', body)
         except Exception as e:
             print('- 👀 renewStatus:', e)
-        #screenshot()
-        pass
+            screenshot()
 
 
     except Exception as e:
