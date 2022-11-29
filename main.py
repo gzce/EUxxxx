@@ -281,7 +281,8 @@ def renew():
         sb.sleep(6)
         try:
             renewText = 'td[class="verdana14px-rot-b"]'
-            sb.assert_element(renewText)
+            #sb.assert_element(renewText)
+            sb.wait_for_element(renewText)
             renewStatus = sb.get_text(renewText)
             print('- renewStatus:', renewStatus)
             if 'Thank you' in renewStatus:
