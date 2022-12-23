@@ -1,8 +1,9 @@
 [![Renew](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml/badge.svg)](https://github.com/mybdye/EUxxxx/actions/workflows/main.yml)
-#### 🕒 TODO
-- None
+
+<img width="262" alt="图片" src="https://user-images.githubusercontent.com/21116709/209272086-bc629624-0709-4b03-936b-83fd8505a892.png">
 
 #### ✏️ NOTE
+- 12 bye
 - 11.29
   - fix customer data confirm while login
   - renew status check
